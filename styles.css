@@ -117,6 +117,8 @@ label {
 	justify-content: center;
 	width: 18px;
 	height: 18px;
+	border: none;
+	padding: 0;
 	border-radius: 50%;
 	background: var(--bg-2);
 	color: #fff;
@@ -145,10 +147,6 @@ label {
 	line-height: 1.35;
 	overflow-wrap: break-word;
 	box-shadow: 0 8px 16px rgba(18, 2, 38, 0.2);
-}
-
-.help-tooltip:hover .help-text {
-	display: block;
 }
 
 .help-tooltip.is-open .help-text {
@@ -281,13 +279,22 @@ tbody tr:hover {
 	.card {
 		padding: 12px;
 	}
+
+	.form-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.label-title {
+		white-space: normal;
+	}
+
+	.label-header,
+	.form-grid > label:not(.full-width) > .label-title {
+		min-height: 0;
+	}
 }
 
 @media (hover: none), (pointer: coarse) {
-	.help-tooltip:hover .help-text {
-		display: none;
-	}
-
 	.help-text {
 		position: fixed;
 		left: 12px;

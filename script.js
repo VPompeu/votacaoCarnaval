@@ -48,7 +48,6 @@ function inicializarTooltips() {
 			}
 		};
 
-		icon.addEventListener("touchstart", alternar, { passive: false });
 		icon.addEventListener("click", alternar);
 		icon.addEventListener("keydown", (event) => {
 			if (event.key === "Enter" || event.key === " ") {
@@ -61,7 +60,8 @@ function inicializarTooltips() {
 	});
 
 	document.addEventListener("click", (event) => {
-		if (!event.target.closest(".help-tooltip")) {
+		const alvo = event.target instanceof Element ? event.target : null;
+		if (!alvo || !alvo.closest(".help-tooltip")) {
 			fecharTodos();
 		}
 	});
