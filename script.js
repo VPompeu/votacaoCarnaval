@@ -5,6 +5,75 @@ const limparTudoBtn = document.getElementById("limparTudo");
 const tabelaAvaliacoes = document.getElementById("tabelaAvaliacoes");
 const tabelaRanking = document.getElementById("tabelaRanking");
 const vencedorEl = document.getElementById("vencedor");
+const mediaTouch = window.matchMedia("(hover: none), (pointer: coarse)");
+
+function inicializarTooltips() {
+	const tooltips = [...document.querySelectorAll(".help-tooltip")];
+	if (tooltips.length === 0) {
+		return;
+	}
+
+	const atualizarEstadoAcessivel = (tooltip, aberto) => {
+		const icon = tooltip.querySelector(".help-icon");
+		if (icon) {
+			icon.setAttribute("aria-expanded", String(aberto));
+		}
+	};
+
+	const fecharTodos = () => {
+		tooltips.forEach((tooltip) => {
+			tooltip.classList.remove("is-open");
+			atualizarEstadoAcessivel(tooltip, false);
+		});
+	};
+
+	tooltips.forEach((tooltip) => {
+		const icon = tooltip.querySelector(".help-icon");
+		if (!icon) {
+			return;
+		}
+
+		icon.setAttribute("role", "button");
+		icon.setAttribute("tabindex", "0");
+		icon.setAttribute("aria-expanded", "false");
+
+		const alternar = (event) => {
+			if (!mediaTouch.matches) {
+				return;
+			}
+
+			event.preventDefault();
+			event.stopPropagation();
+
+			const vaiAbrir = !tooltip.classList.contains("is-open");
+			fecharTodos();
+			if (vaiAbrir) {
+				tooltip.classList.add("is-open");
+				atualizarEstadoAcessivel(tooltip, true);
+			}
+		};
+
+		icon.addEventListener("click", alternar);
+		icon.addEventListener("keydown", (event) => {
+			if (event.key === "Enter" || event.key === " ") {
+				alternar(event);
+			}
+			if (event.key === "Escape") {
+				fecharTodos();
+			}
+		});
+	});
+
+	document.addEventListener("click", (event) => {
+		if (!mediaTouch.matches) {
+			return;
+		}
+
+		if (!event.target.closest(".help-tooltip")) {
+			fecharTodos();
+		}
+	});
+}
 
 function obterAvaliacoes() {
 	try {
@@ -22,8 +91,17 @@ function formatarNumero(valor) {
 	return Number(valor).toFixed(2);
 }
 
+function obterNota(notas, chaveNova, chaveAntiga) {
+	return Number(notas[chaveNova] ?? notas[chaveAntiga] ?? 0);
+}
+
 function calcularTotal(notas) {
-	const soma = notas.fantasia + notas.harmonia + notas.evolucao + notas.criatividade + notas.samba;
+	const soma =
+		obterNota(notas, "criatividadeAdaptacaoTema", "fantasia") +
+		obterNota(notas, "figurinoAderecos", "harmonia") +
+		obterNota(notas, "coreografiaEvolucao", "evolucao") +
+		obterNota(notas, "animacaoEngajamento", "criatividade") +
+		obterNota(notas, "posturaEticaCidadania", "samba");
 	return soma / 5;
 }
 
@@ -38,11 +116,11 @@ function criarConteudoRelatorio(avaliacao) {
 		`Jurado: ${avaliacao.jurado}`,
 		"",
 		"NOTAS:",
-		`- Fantasia: ${formatarNumero(avaliacao.notas.fantasia)}`,
-		`- Harmonia: ${formatarNumero(avaliacao.notas.harmonia)}`,
-		`- Evolução: ${formatarNumero(avaliacao.notas.evolucao)}`,
-		`- Criatividade: ${formatarNumero(avaliacao.notas.criatividade)}`,
-		`- Samba/Enredo: ${formatarNumero(avaliacao.notas.samba)}`,
+		`- Criatividade e adaptação ao tema: ${formatarNumero(obterNota(avaliacao.notas, "criatividadeAdaptacaoTema", "fantasia"))}`,
+		`- Figurino e adereços: ${formatarNumero(obterNota(avaliacao.notas, "figurinoAderecos", "harmonia"))}`,
+		`- Coreografia e evolução: ${formatarNumero(obterNota(avaliacao.notas, "coreografiaEvolucao", "evolucao"))}`,
+		`- Animação e engajamento: ${formatarNumero(obterNota(avaliacao.notas, "animacaoEngajamento", "criatividade"))}`,
+		`- Postura ética e cidadania: ${formatarNumero(obterNota(avaliacao.notas, "posturaEticaCidadania", "samba"))}`,
 		"",
 		`Média final desta apresentação: ${formatarNumero(avaliacao.total)}`,
 		"",
@@ -148,11 +226,11 @@ form.addEventListener("submit", (event) => {
 		jurado: document.getElementById("jurado").value.trim(),
 		dataApresentacao: document.getElementById("dataApresentacao").value,
 		notas: {
-			fantasia: Number(document.getElementById("fantasia").value),
-			harmonia: Number(document.getElementById("harmonia").value),
-			evolucao: Number(document.getElementById("evolucao").value),
-			criatividade: Number(document.getElementById("criatividade").value),
-			samba: Number(document.getElementById("samba").value)
+			criatividadeAdaptacaoTema: Number(document.getElementById("criatividadeAdaptacaoTema").value),
+			figurinoAderecos: Number(document.getElementById("figurinoAderecos").value),
+			coreografiaEvolucao: Number(document.getElementById("coreografiaEvolucao").value),
+			animacaoEngajamento: Number(document.getElementById("animacaoEngajamento").value),
+			posturaEticaCidadania: Number(document.getElementById("posturaEticaCidadania").value)
 		},
 		observacoes: document.getElementById("observacoes").value.trim()
 	};
@@ -181,3 +259,4 @@ limparTudoBtn.addEventListener("click", () => {
 
 renderizarAvaliacoes();
 renderizarRanking();
+inicializarTooltips();

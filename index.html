@@ -17,43 +17,73 @@
 			<h2>Nova Avaliação</h2>
 			<form id="avaliacaoForm" class="form-grid">
 				<label>
-					Grupo
+					<span class="label-title">Grupo</span>
 					<input type="text" id="grupo" required placeholder="Ex.: Unidos da Vila">
 				</label>
 
 				<label>
-					Jurado
+					<span class="label-title">Jurado</span>
 					<input type="text" id="jurado" required placeholder="Nome do jurado">
 				</label>
 
 				<label>
-					Data da apresentação
+					<span class="label-title">Data da apresentação</span>
 					<input type="date" id="dataApresentacao" required>
 				</label>
 
 				<label>
-					Fantasia (0 a 10)
-					<input type="number" id="fantasia" min="0" max="10" step="0.1" required>
+					<span class="label-header">
+						<span class="label-title">Criatividade e adaptação (0 a 10)</span>
+						<span class="help-tooltip" aria-label="Informações sobre Criatividade e adaptação ao tema">
+							<span class="help-icon">?</span>
+							<span class="help-text">Avalie a capacidade da turma de interpretar o filme sorteado.<br>O que observar: O tema é reconhecível? A turma trouxe elementos originais do filme para o contexto do Carnaval? Houve uma solução criativa para o nome do bloco?</span>
+						</span>
+					</span>
+					<input type="number" id="criatividadeAdaptacaoTema" min="0" max="10" step="0.1" required>
 				</label>
 
 				<label>
-					Harmonia (0 a 10)
-					<input type="number" id="harmonia" min="0" max="10" step="0.1" required>
+					<span class="label-header">
+						<span class="label-title">Figurino e adereços (0 a 10)</span>
+						<span class="help-tooltip" aria-label="Informações sobre Figurino e adereços">
+							<span class="help-icon">?</span>
+							<span class="help-text">Avalia o impacto visual do grupo e o esforço na confecção das roupas.<br>O que observar: Os figurinos são coerentes entre si? Houve uso de materiais recicláveis ou reutilizados (conforme incentivado no edital)? O acabamento demonstra dedicação da turma?</span>
+						</span>
+					</span>
+					<input type="number" id="figurinoAderecos" min="0" max="10" step="0.1" required>
 				</label>
 
 				<label>
-					Evolução (0 a 10)
-					<input type="number" id="evolucao" min="0" max="10" step="0.1" required>
+					<span class="label-header">
+						<span class="label-title">Coreografia e evolução (0 a 10)</span>
+						<span class="help-tooltip" aria-label="Informações sobre Coreografia e evolução">
+							<span class="help-icon">?</span>
+							<span class="help-text">Avalia a performance do grupo durante o desfile perante a comissão.<br>O que observar: A dança ou movimentação foi ensaiada? O grupo se manteve unido e organizado durante a apresentação? A música escolhida combina com a performance?</span>
+						</span>
+					</span>
+					<input type="number" id="coreografiaEvolucao" min="0" max="10" step="0.1" required>
 				</label>
 
 				<label>
-					Criatividade (0 a 10)
-					<input type="number" id="criatividade" min="0" max="10" step="0.1" required>
+					<span class="label-header">
+						<span class="label-title">Animação e engajamento (0 a 10)</span>
+						<span class="help-tooltip" aria-label="Informações sobre Animação e engajamento">
+							<span class="help-icon">?</span>
+							<span class="help-text">Avalia o "espírito carnavalesco" e a integração dos alunos.<br>O que observar: A turma demonstra alegria e entusiasmo? Todos os membros estão participando ativamente ou apenas uma parte do grupo? O bloco consegue contagiar o público?</span>
+						</span>
+					</span>
+					<input type="number" id="animacaoEngajamento" min="0" max="10" step="0.1" required>
 				</label>
 
 				<label>
-					Samba/Enredo (0 a 10)
-					<input type="number" id="samba" min="0" max="10" step="0.1" required>
+					<span class="label-header">
+						<span class="label-title">Postura ética e cidadania (0 a 10)</span>
+						<span class="help-tooltip" aria-label="Informações sobre Postura ética e cidadania">
+							<span class="help-icon">?</span>
+							<span class="help-text">Avalia o respeito às normas do IFRS e à convivência escolar.<br>O que observar: As músicas e vestimentas são adequadas ao ambiente escolar? O grupo respeitou os demais blocos e a diversidade? Houve comportamento exemplar durante todo o evento?</span>
+						</span>
+					</span>
+					<input type="number" id="posturaEticaCidadania" min="0" max="10" step="0.1" required>
 				</label>
 
 				<label class="full-width">
