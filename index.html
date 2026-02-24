@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sistema Carnaval - Avaliação Cultural</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<main class="container">
+		<header class="header">
+			<h1>Sistema de Avaliação Cultural de Carnaval</h1>
+			<p>Registre notas, gere relatório por apresentação e descubra o grupo vencedor.</p>
+		</header>
+
+		<section class="card">
+			<h2>Nova Avaliação</h2>
+			<form id="avaliacaoForm" class="form-grid">
+				<label>
+					Grupo
+					<input type="text" id="grupo" required placeholder="Ex.: Unidos da Vila">
+				</label>
+
+				<label>
+					Jurado
+					<input type="text" id="jurado" required placeholder="Nome do jurado">
+				</label>
+
+				<label>
+					Data da apresentação
+					<input type="date" id="dataApresentacao" required>
+				</label>
+
+				<label>
+					Fantasia (0 a 10)
+					<input type="number" id="fantasia" min="0" max="10" step="0.1" required>
+				</label>
+
+				<label>
+					Harmonia (0 a 10)
+					<input type="number" id="harmonia" min="0" max="10" step="0.1" required>
+				</label>
+
+				<label>
+					Evolução (0 a 10)
+					<input type="number" id="evolucao" min="0" max="10" step="0.1" required>
+				</label>
+
+				<label>
+					Criatividade (0 a 10)
+					<input type="number" id="criatividade" min="0" max="10" step="0.1" required>
+				</label>
+
+				<label>
+					Samba/Enredo (0 a 10)
+					<input type="number" id="samba" min="0" max="10" step="0.1" required>
+				</label>
+
+				<label class="full-width">
+					Observações
+					<textarea id="observacoes" rows="3" placeholder="Comentários sobre a apresentação"></textarea>
+				</label>
+
+				<div class="actions full-width">
+					<button type="submit" class="btn-primary">Salvar Avaliação</button>
+					<button type="button" id="limparTudo" class="btn-danger">Apagar Todas as Avaliações</button>
+				</div>
+			</form>
+		</section>
+
+		<section class="card">
+			<h2>Avaliações Registradas</h2>
+			<div class="table-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th>Grupo</th>
+							<th>Jurado</th>
+							<th>Data</th>
+							<th>Total</th>
+							<th>Relatório</th>
+						</tr>
+					</thead>
+					<tbody id="tabelaAvaliacoes"></tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="card">
+			<h2>Resultado Final por Grupo</h2>
+			<p id="vencedor" class="winner">Ainda não há avaliações suficientes para definir vencedor.</p>
+			<div class="table-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th>Posição</th>
+							<th>Grupo</th>
+							<th>Qtd. Avaliações</th>
+							<th>Média Final</th>
+						</tr>
+					</thead>
+					<tbody id="tabelaRanking"></tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
