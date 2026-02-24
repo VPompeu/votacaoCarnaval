@@ -5,7 +5,6 @@ const limparTudoBtn = document.getElementById("limparTudo");
 const tabelaAvaliacoes = document.getElementById("tabelaAvaliacoes");
 const tabelaRanking = document.getElementById("tabelaRanking");
 const vencedorEl = document.getElementById("vencedor");
-const mediaTouch = window.matchMedia("(hover: none), (pointer: coarse)");
 
 function inicializarTooltips() {
 	const tooltips = [...document.querySelectorAll(".help-tooltip")];
@@ -38,10 +37,6 @@ function inicializarTooltips() {
 		icon.setAttribute("aria-expanded", "false");
 
 		const alternar = (event) => {
-			if (!mediaTouch.matches) {
-				return;
-			}
-
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -53,6 +48,7 @@ function inicializarTooltips() {
 			}
 		};
 
+		icon.addEventListener("touchstart", alternar, { passive: false });
 		icon.addEventListener("click", alternar);
 		icon.addEventListener("keydown", (event) => {
 			if (event.key === "Enter" || event.key === " ") {
@@ -65,10 +61,6 @@ function inicializarTooltips() {
 	});
 
 	document.addEventListener("click", (event) => {
-		if (!mediaTouch.matches) {
-			return;
-		}
-
 		if (!event.target.closest(".help-tooltip")) {
 			fecharTodos();
 		}
