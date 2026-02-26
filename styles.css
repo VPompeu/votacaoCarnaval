@@ -154,6 +154,7 @@ label {
 }
 
 input,
+select,
 textarea,
 button {
 	font-family: inherit;
@@ -161,6 +162,7 @@ button {
 }
 
 input,
+select,
 textarea {
 	border: 1px solid var(--border);
 	border-radius: 8px;
@@ -169,6 +171,7 @@ textarea {
 }
 
 input:focus,
+select:focus,
 textarea:focus {
 	outline: 2px solid rgba(216, 27, 144, 0.25);
 	border-color: var(--primary);
